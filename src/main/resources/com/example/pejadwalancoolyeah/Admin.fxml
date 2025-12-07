@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="702.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pejadwalancoolyeah.AdminController">
+   <children>
+      <AnchorPane layoutX="14.0" layoutY="12.0" prefHeight="375.0" prefWidth="168.0" style="-fx-border-color: #1e90ff; -fx-border-radius: 6px;">
+         <children>
+            <Button fx:id="btnJadwal" layoutX="14.0" layoutY="91.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="141.0" style="-fx-background-color: #1e90ff;" text="Jadwal" textFill="WHITE" />
+            <Button fx:id="btnSaran" layoutX="14.0" layoutY="135.0" mnemonicParsing="false" onAction="#saran" prefHeight="32.0" prefWidth="141.0" style="-fx-background-color: #1e90ff;" text="Saran" textFill="WHITE" />
+            <Button fx:id="btnList" layoutX="14.0" layoutY="176.0" mnemonicParsing="false" onAction="#list" prefHeight="32.0" prefWidth="141.0" style="-fx-background-color: #1e90ff;" text="List" textFill="WHITE" />
+            <Button fx:id="btnLogout" layoutX="14.0" layoutY="329.0" mnemonicParsing="false" onAction="#logout" prefHeight="32.0" prefWidth="141.0" style="-fx-background-color: #ff0000;" text="Logout" textFill="WHITE" />
+            <Text fill="DODGERBLUE" layoutX="10.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DAMN" textAlignment="CENTER" wrappingWidth="149.33333333333348">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="190.0" layoutY="12.0" prefHeight="120" prefWidth="500.0" style="-fx-border-color: #1e90ff; -fx-border-radius: 6px;">
+         <children>
+            <Label layoutX="237.0" layoutY="5.0" text="Add" />
+            <Label layoutX="14.0" layoutY="34.0" text="Mata Kuliah" />
+            <Label layoutX="124.0" layoutY="35.0" text="SKS" />
+            <Label layoutX="167.0" layoutY="36.0" text="Jam" />
+            <Label layoutX="222.0" layoutY="36.0" text="Ruangan" />
+            <Label layoutX="295.0" layoutY="36.0" text="Hari" />
+            <Label layoutX="368.0" layoutY="36.0" text="Jurusan" />
+            <Label layoutX="437.0" layoutY="37.0" text="Semester" />
+            <TextField fx:id="AMatkul" layoutX="14.0" layoutY="51.0" prefHeight="25.0" prefWidth="100.0" />
+            <TextField fx:id="ASKS" layoutX="124.0" layoutY="52.0" prefHeight="25.0" prefWidth="31.0" />
+            <TextField fx:id="AJam" layoutX="165.0" layoutY="53.0" prefHeight="25.0" prefWidth="47.0" />
+            <TextField fx:id="ARuangan" layoutX="222.0" layoutY="53.0" prefHeight="25.0" prefWidth="63.0" />
+            <TextField fx:id="AHari" layoutX="295.0" layoutY="54.0" prefHeight="25.0" prefWidth="63.0" />
+            <TextField fx:id="AJurusan" layoutX="368.0" layoutY="54.0" prefHeight="25.0" prefWidth="63.0" />            
+            <TextField fx:id="ASemester" layoutX="437.0" layoutY="55.0" prefHeight="25.0" prefWidth="49.0" />            
+            <Button fx:id="add" layoutX="14.0" layoutY="81.0" mnemonicParsing="false" onAction="#addData" prefHeight="25.0" prefWidth="63.0" style="-fx-background-color: #1e90ff;" text="Add" textFill="WHITE" />
+            
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="190.0" layoutY="140.0" prefHeight="120" prefWidth="500.0" style="-fx-border-color: #1e90ff; -fx-border-radius: 6px;">
+         <children>
+            <Label layoutX="230.0" layoutY="5.0" text="Update" />
+            <Label layoutX="14.0" layoutY="34.0" text="Mata Kuliah" />
+            <Label layoutX="173.0" layoutY="34.0" text="SKS" />
+            <Label layoutX="239.0" layoutY="34.0" text="Jam" />
+            <Label layoutX="286.0" layoutY="34.0" text="Ruangan" />
+            <TextField fx:id="UMatkul" layoutX="14.0" layoutY="51.0" />
+            <TextField fx:id="USKS" layoutX="173.0" layoutY="51.0" prefHeight="25.0" prefWidth="47.0" />
+            <TextField fx:id="UJam" layoutX="235.0" layoutY="51.0" prefHeight="25.0" prefWidth="43.0" />
+            <TextField fx:id="URuangan" layoutX="287.0" layoutY="51.0" prefHeight="25.0" prefWidth="91.0" />
+            <TextField fx:id="UHari" layoutX="390.0" layoutY="51.0" prefHeight="25.0" prefWidth="91.0" />
+            <Button fx:id="up" layoutX="14.0" layoutY="81.0" mnemonicParsing="false" onAction="#updateData" prefHeight="25.0" prefWidth="63.0" style="-fx-background-color: #1e90ff;" text="Update" textFill="WHITE" />
+            <Label layoutX="390.0" layoutY="34.0" text="Hari" />
+            
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="190.0" layoutY="267.0" prefHeight="120" prefWidth="500.0" style="-fx-border-color: #1e90ff; -fx-border-radius: 6px;">
+         <children>
+            <Label layoutX="228.0" layoutY="5.0" text="Remove" />
+            <Label layoutX="14.0" layoutY="34.0" text="Mata Kuliah" />
+            <TextField fx:id="RMatkul" layoutX="14.0" layoutY="51.0" prefHeight="25.0" prefWidth="395.0" />
+            <Button fx:id="rm" layoutX="422.0" layoutY="51.0" mnemonicParsing="false" onAction="#removeData" prefHeight="25.0" prefWidth="63.0" style="-fx-background-color: #1e90ff;" text="Remove" textFill="WHITE" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

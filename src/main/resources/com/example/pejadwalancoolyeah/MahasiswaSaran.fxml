@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx" 
+      xmlns:fx="http://javafx.com/fxml" 
+      fx:controller="com.example.pejadwalancoolyeah.MahasiswaSaranController" 
+      spacing="10" 
+      style="-fx-padding: 20;">
+    
+    <Label text="Kirim Saran ke Admin" 
+           style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+    
+    <Label fx:id="lblInfo" text="Kirim saran sebagai: " 
+           style="-fx-font-size: 14px;"/>
+    
+    <VBox spacing="5">
+        <Label text="Saran/Masukan:" style="-fx-font-weight: bold;"/>
+        <TextArea fx:id="txtSaran" 
+                  VBox.vgrow="ALWAYS" 
+                  style="-fx-min-height: 200px; -fx-pref-height: 300px;"
+                  wrapText="true"/>
+    </VBox>
+    
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button fx:id="btnKirim" text="Kirim Saran" onAction="#kirimSaran" 
+                style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-min-width: 100px;"/>
+        <Button fx:id="btnKembali" text="Kembali" onAction="#kembali" 
+                style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-min-width: 100px;"/>
+    </HBox>
+    
+</VBox>
