@@ -26,16 +26,11 @@ public class MahasiswaSaranController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("MahasiswaSaranController initialized!");
-        
-        // Set placeholder text untuk TextArea
         txtSaran.setPromptText("Tulis saran atau masukan Anda di sini...");
-        
-        // Styling tombol
         btnKirim.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white;");
         btnKembali.setStyle("-fx-background-color: #f44336; -fx-text-fill: white;");
     }
     
-    // Method untuk menerima data nama mahasiswa dari MahasiswaController
     public void setMahasiswa(String namaMahasiswa) {
         this.namaMahasiswa = namaMahasiswa;
         lblInfo.setText("Kirim saran sebagai: " + namaMahasiswa);
@@ -78,11 +73,8 @@ public class MahasiswaSaranController implements Initializable {
     @FXML
     private void kembali(ActionEvent event) {
         try {
-            // Kembali ke halaman mahasiswa
             javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("Mahasiswa.fxml"));
             javafx.scene.Parent root = loader.load();
-            
-            // Set nama mahasiswa kembali ke MahasiswaController
             MahasiswaController mahasiswaController = loader.getController();
             mahasiswaController.setMahasiswaLogin(namaMahasiswa);
             
