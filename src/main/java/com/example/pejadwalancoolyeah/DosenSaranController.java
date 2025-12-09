@@ -26,16 +26,11 @@ public class DosenSaranController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("DosenSaranController initialized!");
-        
-        // Set placeholder text untuk TextArea
         txtSaran.setPromptText("Tulis saran atau masukan Anda di sini...");
-        
-        // Styling tombol
         btnKirim.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white;");
         btnKembali.setStyle("-fx-background-color: #f44336; -fx-text-fill: white;");
     }
     
-    // Method untuk menerima data nama dosen dari DosenController
     public void setNamaDosen(String namaDosen) {
         this.namaDosen = namaDosen;
         lblInfo.setText("Kirim saran sebagai: " + namaDosen);
@@ -78,11 +73,8 @@ public class DosenSaranController implements Initializable {
     @FXML
     private void kembali(ActionEvent event) {
         try {
-            // Kembali ke halaman dosen
             javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("Dosen.fxml"));
             javafx.scene.Parent root = loader.load();
-            
-            // Set nama dosen kembali ke DosenController
             DosenController dosenController = loader.getController();
             dosenController.setDosenLogin(namaDosen);
             
