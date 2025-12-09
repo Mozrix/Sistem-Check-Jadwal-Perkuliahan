@@ -63,24 +63,20 @@ public class LoginController {
     }
 
     private LoginResult authenticateUser(Connection conn, String username, String password) {
-        // Query untuk mahasiswa - username = npm, password = tanggal_lahir
         String queryMahasiswa = 
             "SELECT 'MAHASISWA' as role, nama " +
             "FROM mahasiswa m " +
             "WHERE m.npm = ? AND DATE_FORMAT(m.tanggal_lahir, '%Y%m%d') = ?";
         
-        // Query untuk dosen - username = nip, password = tanggal_lahir  
         String queryDosen = 
             "SELECT 'DOSEN' as role, nama " +
             "FROM dosen d " +
             "WHERE d.nip = ? AND DATE_FORMAT(d.tanggal_lahir, '%Y%m%d') = ?";
         
-        // Query untuk admin - tetap menggunakan tabel users
         String queryAdmin = 
             "SELECT role, username as nama FROM users WHERE username = ? AND password = ? AND role = 'ADMIN'";
 
         try {
-            // Cek sebagai mahasiswa terlebih dahulu
             try (PreparedStatement pst = conn.prepareStatement(queryMahasiswa)) {
                 pst.setString(1, username);
                 pst.setString(2, password);
@@ -93,7 +89,6 @@ public class LoginController {
                 }
             }
 
-            // Cek sebagai dosen
             try (PreparedStatement pst = conn.prepareStatement(queryDosen)) {
                 pst.setString(1, username);
                 pst.setString(2, password);
@@ -106,7 +101,6 @@ public class LoginController {
                 }
             }
 
-            // Cek sebagai admin
             try (PreparedStatement pst = conn.prepareStatement(queryAdmin)) {
                 pst.setString(1, username);
                 pst.setString(2, password);
@@ -130,7 +124,6 @@ public class LoginController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Dosen.fxml"));
             Parent root = loader.load();
             
-            // Dapatkan controller dan set data dosen
             DosenController dosenController = loader.getController();
             dosenController.setDosenLogin(namaDosen);
             
@@ -149,11 +142,6 @@ public class LoginController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Mahasiswa.fxml"));
             Parent root = loader.load();
             
-            // Dapatkan controller dan set data mahasiswa jika ada
-            // MahasiswaController mahasiswaController = loader.getController();
-            // if (mahasiswaController != null) {
-            //     mahasiswaController.setMahasiswaLogin(namaMahasiswa);
-            // }
             MahasiswaController MahasiswaController = loader.getController();
             MahasiswaController.setMahasiswaLogin(namaMahasiswa);
             
