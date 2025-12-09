@@ -51,16 +51,11 @@ public class DosenController implements Initializable {
         
         lblWelcome.setText("Selamat datang, " + namaDosen);
         lblMatkul.setText("Memuat data...");
-        
-        // Ambil data dosen dan tampilkan jadwal
         loadJadwalDosen();
     }
     
     private void setupTableColumns() {
-        // Hapus kolom yang ada
         jadwalTable.getColumns().clear();
-        
-        // Buat kolom baru secara manual
         TableColumn<Jadwal, String> colHari = new TableColumn<>("Hari");
         colHari.setCellValueFactory(new PropertyValueFactory<>("hari"));
         colHari.setPrefWidth(100);
@@ -77,7 +72,6 @@ public class DosenController implements Initializable {
         colRuangan.setCellValueFactory(new PropertyValueFactory<>("ruangan"));
         colRuangan.setPrefWidth(100);
         
-        // Tambahkan kolom ke tabel
         jadwalTable.getColumns().addAll(colHari, colJam, colMatkul, colRuangan);
     }
     
@@ -88,7 +82,6 @@ public class DosenController implements Initializable {
         }
         
         try (Connection conn = dbConnection.getConnection()) {
-            // 1. Ambil pj_matkul dari tabel dosen
             String sqlDosen = "SELECT pj_matkul FROM dosen WHERE nama = ?";
             PreparedStatement pstDosen = conn.prepareStatement(sqlDosen);
             pstDosen.setString(1, namaDosenLogin);
@@ -97,8 +90,6 @@ public class DosenController implements Initializable {
             if (rsDosen.next()) {
                 pjMatkul = rsDosen.getString("pj_matkul");
                 lblMatkul.setText("Mata Kuliah: " + pjMatkul);
-                
-                // 2. Ambil jadwal dari tabel jadwal berdasarkan pj_matkul
                 loadJadwalFromJadwalTable(pjMatkul);
             } else {
                 showAlert("Error", "Data dosen tidak ditemukan di database");
@@ -114,8 +105,6 @@ public class DosenController implements Initializable {
         ObservableList<Jadwal> data = FXCollections.observableArrayList();
 
         try (Connection conn = dbConnection.getConnection()) {
-            // Asumsi kolom di tabel jadwal: hari, jam, mata_kuliah, ruangan
-            // Sesuaikan dengan struktur tabel jadwal Anda
             String sql = "SELECT hari, jam, matkul, ruangan FROM jadwal WHERE matkul = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, mataKuliah);
