@@ -38,30 +38,21 @@ public class MahasiswaController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("MahasiswaController initialized!");
-        
-        // Setup kolom tabel
-        setupTableColumns();
-        
+        setupTableColumns();        
         lblWelcome.setText("Selamat datang");
         lblInfo.setText("Memuat data...");
     }
     
     public void setMahasiswaLogin(String namaMahasiswa) {
         this.namaMahasiswaLogin = namaMahasiswa;
-        System.out.println("Mahasiswa login: " + namaMahasiswa);
-        
+        System.out.println("Mahasiswa login: " + namaMahasiswa);        
         lblWelcome.setText("Selamat datang, " + namaMahasiswa);
         lblInfo.setText("Memuat data...");
-        
-        // Ambil data mahasiswa dan tampilkan jadwal
         loadJadwalMahasiswa();
     }
     
     private void setupTableColumns() {
-        // Hapus kolom yang ada
         jadwalTable.getColumns().clear();
-        
-        // Buat kolom baru
         TableColumn<Jadwal, String> colHari = new TableColumn<>("Hari");
         colHari.setCellValueFactory(new PropertyValueFactory<>("hari"));
         colHari.setPrefWidth(100);
@@ -80,9 +71,7 @@ public class MahasiswaController implements Initializable {
         
         TableColumn<Jadwal, String> colRuangan = new TableColumn<>("Ruangan");
         colRuangan.setCellValueFactory(new PropertyValueFactory<>("ruangan"));
-        colRuangan.setPrefWidth(100);
-        
-        // Tambahkan kolom ke tabel
+        colRuangan.setPrefWidth(100);        
         jadwalTable.getColumns().addAll(colHari, colJam, colMatkul, colDosen, colRuangan);
     }
     
@@ -93,7 +82,6 @@ public class MahasiswaController implements Initializable {
         }
         
         try (Connection conn = dbConnection.getConnection()) {
-            // 1. Ambil jurusan dan semester dari tabel mahasiswa
             String sqlMahasiswa = "SELECT jurusan, semester FROM mahasiswa WHERE nama = ?";
             PreparedStatement pstMahasiswa = conn.prepareStatement(sqlMahasiswa);
             pstMahasiswa.setString(1, namaMahasiswaLogin);
@@ -103,8 +91,6 @@ public class MahasiswaController implements Initializable {
                 jurusan = rsMahasiswa.getString("jurusan");
                 semester = rsMahasiswa.getString("semester");
                 lblInfo.setText("Jurusan: " + jurusan + " | Semester: " + semester);
-                
-                // 2. Ambil jadwal berdasarkan jurusan
                 loadJadwalByJurusan(jurusan, semester);
             } else {
                 showAlert("Error", "Data mahasiswa tidak ditemukan di database");
@@ -120,8 +106,6 @@ public class MahasiswaController implements Initializable {
         ObservableList<Jadwal> data = FXCollections.observableArrayList();
 
         try (Connection conn = dbConnection.getConnection()) {
-            // Asumsi tabel jadwal memiliki kolom jurusan dan semester
-            // Jika tidak ada kolom semester di jadwal, hapus bagian semester dari query
             String sql = "SELECT j.*, d.nama as nama_dosen FROM jadwal j " +
                         "LEFT JOIN dosen d ON j.id = d.id " +
                         "WHERE j.jurusan = ? ";
@@ -159,11 +143,8 @@ public class MahasiswaController implements Initializable {
     @FXML
     private void kirimSaran(ActionEvent event) {
         try {
-            // Load halaman kirim saran mahasiswa
             FXMLLoader loader = new FXMLLoader(getClass().getResource("MahasiswaSaran.fxml"));
             Parent root = loader.load();
-            
-            // Kirim nama mahasiswa ke controller saran
             MahasiswaSaranController saranController = loader.getController();
             saranController.setMahasiswa(namaMahasiswaLogin);
             
@@ -189,7 +170,6 @@ public class MahasiswaController implements Initializable {
     }
     
     private String formatJam(String jam) {
-        // Format jam jika perlu
         if (jam != null && jam.length() >= 5) {
             return jam.substring(0, 5);
         }
