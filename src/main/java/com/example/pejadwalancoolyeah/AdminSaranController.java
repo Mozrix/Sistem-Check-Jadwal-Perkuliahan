@@ -31,8 +31,6 @@ public class AdminSaranController implements Initializable{
     @FXML private TableView<Saran> saran;
     @FXML private Button btnLogout;
     @FXML private Button btnSaran;
-    
-    // Definisikan kolom tabel (tanpa role)
     @FXML private TableColumn<Saran, String> colPengirim;
     @FXML private TableColumn<Saran, String> colSaran;
     @FXML private TableColumn<Saran, Void> colAksi;
@@ -45,11 +43,9 @@ public class AdminSaranController implements Initializable{
     }
     
     private void setupTableColumns() {
-        // Setup kolom tabel (tanpa role)
         colPengirim.setCellValueFactory(new PropertyValueFactory<>("pengirim"));
         colSaran.setCellValueFactory(new PropertyValueFactory<>("saran"));
-        
-        // Setup kolom aksi dengan button Ya dan Tidak
+
         colAksi.setCellFactory(new Callback<TableColumn<Saran, Void>, TableCell<Saran, Void>>() {
             @Override
             public TableCell<Saran, Void> call(final TableColumn<Saran, Void> param) {
@@ -78,12 +74,11 @@ public class AdminSaranController implements Initializable{
                         if (empty) {
                             setGraphic(null);
                         } else {
-                            // Selalu tampilkan kedua button untuk saran yang belum diproses
                             Saran data = getTableView().getItems().get(getIndex());
                             if (data.getStatus() == null) {
                                 setGraphic(new javafx.scene.layout.HBox(5, btnYa, btnTidak));
                             } else {
-                                setGraphic(null); // Sembunyikan button jika sudah diproses
+                                setGraphic(null);
                             }
                         }
                     }
@@ -128,7 +123,6 @@ public class AdminSaranController implements Initializable{
 
         try {
             Connection con = dbConnection.getConnection();
-            // Ambil data saran yang belum diproses (status IS NULL) - tanpa role
             String sql = "SELECT id, pengirim, saran, status FROM saran WHERE status IS NULL ORDER BY created_at DESC";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -154,7 +148,6 @@ public class AdminSaranController implements Initializable{
     private void setujuiSaran(int id) {
         try {
             Connection con = dbConnection.getConnection();
-            // Update status saran menjadi DISETUJUI (tidak menghapus dari DB)
             String sql = "UPDATE saran SET status = 'DISETUJUI' WHERE id = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
@@ -162,7 +155,7 @@ public class AdminSaranController implements Initializable{
             int affectedRows = ps.executeUpdate();
             if (affectedRows > 0) {
                 showAlert("Sukses", "Saran telah disetujui dan tetap tersimpan di database.");
-                loadData(); // Refresh tabel
+                loadData();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -173,7 +166,6 @@ public class AdminSaranController implements Initializable{
     private void hapusSaran(int id) {
         try {
             Connection con = dbConnection.getConnection();
-            // Hapus saran dari database
             String sql = "DELETE FROM saran WHERE id = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
@@ -181,7 +173,7 @@ public class AdminSaranController implements Initializable{
             int affectedRows = ps.executeUpdate();
             if (affectedRows > 0) {
                 showAlert("Sukses", "Saran telah ditolak dan dihapus dari database.");
-                loadData(); // Refresh tabel setelah penghapusan
+                loadData();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -196,8 +188,6 @@ public class AdminSaranController implements Initializable{
         alert.setContentText(message);
         alert.showAndWait();
     }
-    
-    // Model class untuk data saran (tanpa role)
     public static class Saran {
         private final int id;
         private final String pengirim;
