@@ -89,9 +89,6 @@ public class AdminController {
         }
     }
 
-    // ======================================================
-    // UPDATE DATA
-    // ======================================================
     @FXML
     private void updateData() {
         String sql = "UPDATE jadwal SET sks=?, jam=?, ruangan=?, hari=? WHERE matkul=?";
@@ -116,9 +113,6 @@ public class AdminController {
         }
     }
 
-    // ======================================================
-    // REMOVE DATA
-    // ======================================================
     @FXML
     private void removeData() {
         String sql = "DELETE FROM jadwal WHERE matkul=?";
